@@ -1,26 +1,40 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, {Component} from 'react';
+import { geolocated } from "react-geolocated";
+import getDoctor from './Services/places';
+
 import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component {
+  constructor(props){
+    super(props);
+    this.inputText=React.createRef();
+  }
+  
+  searchDoctor = async () => {
+    console.log(this.inputText.current.value)
+    await getDoctor(this.inputText.current.value, this.props.coords.latitude, this.props.coords.longitude)
+
+  }
+
+  render() {
+    return !this.props.isGeolocationAvailable ? (
+        <div>Your browser does not support Geolocation</div>
+    ) : !this.props.isGeolocationEnabled ? (
+        <div>Geolocation is not enabled</div>
+    ) : this.props.coords ? (
+       <div>
+          <input type="text" ref={this.inputText}></input>
+          <button onClick={this.searchDoctor}>Buscar</button>
+       </div>
+    ) : (
+        <div>Getting the location data&hellip; </div>
+    );
+}
 }
 
-export default App;
+export default geolocated({
+  positionOptions: {
+      enableHighAccuracy: false,
+  },
+  userDecisionTimeout: 5000,
+})(App);
