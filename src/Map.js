@@ -2,9 +2,9 @@ import React, { Component } from "react";
 import GoogleMapReact from "google-map-react";
 import Marker from "google-map-react";
 import {apiKey} from './config/privat';
+import getDoctor from './Services/places';
 
 const AnyReactComponent = ({ text }) => <div>{text}</div>;
-
 const handleApiLoaded = (map, maps) => {
   // use map and maps objects
 };
@@ -12,16 +12,32 @@ const handleApiLoaded = (map, maps) => {
 export default class Map extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      places: [],
+      isLoaded: false //flag is map loaded? indica cuando esta esperando el response dl request
+    };
+
+    this.searchDoctor();
   }
 
+  searchDoctor = async () => {
+    let places = await getDoctor(this.props.search, this.props.lat, this.props.lng)
+    
+    this.setState({
+      places: places.data.results,
+      isLoaded: true // el flag cambia a true cuando recibe el response
+    });
+    
+    return places.data.results;
+}
   static defaultProps = {
-    zoom: 14
+    zoom: 14 //zoom del mapa(libreria)
   };
 
   render() {
-    const { places } = this.props;
+    const { places } = this.state;
 
-    return (
+    return this.state.isLoaded ? (
       <div style={{ height: "100vh", width: "100%" }}>
         <GoogleMapReact
           bootstrapURLKeys={{ key: apiKey }}
@@ -30,6 +46,10 @@ export default class Map extends Component {
           yesIWantToUseGoogleMapApiInternals
           onGoogleApiLoaded={({ map, maps }) => handleApiLoaded(map, maps)}
         >
+          
+          {//recorre los lugares(vienen en un array) encontrados y los dibuja en el mapa en cada lugar tiene 
+          //su lat y lng
+          }
           {places.map(place => {
             return (
               <AnyReactComponent
@@ -42,6 +62,6 @@ export default class Map extends Component {
           })}
         </GoogleMapReact>
       </div>
-    );
+    ): ( <div>LOADING </div>)
   }
 }

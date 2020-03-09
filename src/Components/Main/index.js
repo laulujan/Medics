@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import { InputGroup, InputGroupAddon, Button, Input, Container, Row, Col} from 'reactstrap';
 import {Link} from 'react-router-dom';
+import './styles.css'
 
 class Main extends Component {
     constructor(props){
@@ -16,7 +17,7 @@ class Main extends Component {
     }
     render (){
         return <>
-        <Container>
+        <Container className="searchBar">
             <Row>
                 <Col>
                 <InputGroup>

@@ -7,13 +7,14 @@ import {
 import Menu from '../src/Components/Menu';
 import Main from '../src/Components/Main';
 import Search from '../src/Components/Search/index'
+import {Container} from 'reactstrap';
 
 import './App.css';
 
 class App extends Component {
   render() {
     return (
-    <>
+
     <Router>
       <Menu></Menu>
       <Switch>
@@ -25,10 +26,8 @@ class App extends Component {
             <Main />
           </Route>
       
-      
     </Router>
     
-    </>
     )  
   }
 }

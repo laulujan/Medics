@@ -7,7 +7,7 @@ class Menu extends Component{
         return  <div>
         <Navbar expand="md">
           <NavbarBrand href="/">
-              <img src='img/logo1.png' className="logo1"></img>
+              <img src='img/logo1.png' className="logo1" alt="medics-logo"></img>
           </NavbarBrand>
         </Navbar>
         </div>   
