@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import { InputGroup, InputGroupAddon, Button, Input, Container, Row, Col} from 'reactstrap';
 import {Link} from 'react-router-dom';
+
 import './styles.css'
 
 class Main extends Component {
@@ -17,21 +18,29 @@ class Main extends Component {
     }
     render (){
         return <>
-        <Container className="searchBar">
+        <Container >
             <Row>
-                <Col>
-                <InputGroup>
-                    <Input placeholder="Especialidad" 
+                <Col lg="7" sm ="12">
+                <div>
+                    <img src="img/doctors2.png" className="img-fluid"></img>
+                </div>
+                </Col>
+                <Col lg="5" sm="12">
+                <div className="div-center">
+                    <div className="content">
+                        <Input placeholder="Especialidad" 
                     bsSize="lg" 
                     onChange={this.onChange} />
-                    <InputGroupAddon addonType="append">
-                    <Link  to={{ pathname:'/search', especialidad: this.state.speciality }}>
-                        <Button outline color="info" size="lg">Buscar</Button>
+                    </div>
+                    <div className="content"> 
+                        <Link  to={{ pathname:'/search', especialidad: this.state.speciality }}>
+                        <Button outline color="info" size="lg" block>Buscar</Button>
                     </Link>
-                    </InputGroupAddon>
-                </InputGroup>
+                    </div>
+                </div>
                 </Col>
             </Row>
+
         </Container>
         </>
     }

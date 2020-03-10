@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import GoogleMapReact from "google-map-react";
-import Marker from "google-map-react";
+//import Marker from "google-map-react";
 import {apiKey} from './config/privat';
 import getDoctor from './Services/places';
 
@@ -38,7 +38,7 @@ export default class Map extends Component {
     const { places } = this.state;
 
     return this.state.isLoaded ? (
-      <div style={{ height: "100vh", width: "100%" }}>
+      <div style={{ height: 500, width: "70%" }}>
         <GoogleMapReact
           bootstrapURLKeys={{ key: apiKey }}
           defaultCenter={{ lat: this.props.lat, lng: this.props.lng }}
