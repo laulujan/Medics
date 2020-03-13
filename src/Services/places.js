@@ -7,7 +7,7 @@ async function getDoctor(keyword, lat, long){
 
       //axios.defaults.headers.get['Content-Type'] ='application/json;charset=utf-8';
   //axios.defaults.headers.get['Access-Control-Allow-Origin'] = '*';
- 
+ // CORS EXTERNO
    let proxy = 'https://cors-anywhere.herokuapp.com/'
     const response = await axios
     .get(proxy+endPoint)

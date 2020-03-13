@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import GoogleMapReact from "google-map-react";
 //import Marker from "google-map-react";
 import {apiKey} from './config/privat';
-import getDoctor from './Services/places';
+
 
 const AnyReactComponent = ({ text }) => <div>{text}</div>;
 const handleApiLoaded = (map, maps) => {
@@ -12,33 +12,18 @@ const handleApiLoaded = (map, maps) => {
 export default class Map extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      places: [],
-      isLoaded: false //flag is map loaded? indica cuando esta esperando el response dl request
-    };
 
-    this.searchDoctor();
   }
 
-  searchDoctor = async () => {
-    let places = await getDoctor(this.props.search, this.props.lat, this.props.lng)
-    
-    this.setState({
-      places: places.data.results,
-      isLoaded: true // el flag cambia a true cuando recibe el response
-    });
-    
-    return places.data.results;
-}
   static defaultProps = {
     zoom: 14 //zoom del mapa(libreria)
   };
 
   render() {
-    const { places } = this.state;
+    const { places } = this.props;
 
-    return this.state.isLoaded ? (
-      <div style={{ height: 500, width: "70%" }}>
+    return this.props.isLoaded ? (
+      <div style={{ height: 400, width: "100%" }}>
         <GoogleMapReact
           bootstrapURLKeys={{ key: apiKey }}
           defaultCenter={{ lat: this.props.lat, lng: this.props.lng }}
