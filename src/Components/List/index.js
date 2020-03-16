@@ -21,7 +21,7 @@ class lista extends Component {
               <ListGroupItemText>
                 {place.vicinity}
               </ListGroupItemText>
-              <Button> Cita </Button>
+              <Button onClick={() => this.props.agendar(1)}> Cita </Button>
             </ListGroupItem>
           );
         })}

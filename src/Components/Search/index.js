@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { geolocated } from "react-geolocated";
 import { Container, Row, Col} from 'reactstrap';
-import getDoctor from '../../Services/places';
-import Lista from '../List'
+import servicePlaces from '../../Services/places';
+import Lista from '../List';
+import ModalForm from '../Modal/modal';
 
 import Map from '../../Map'
 class Search extends Component {
@@ -11,8 +12,11 @@ class Search extends Component {
         super(props);
         this.state = {
             places: [],
-            isLoaded: false //flag is map loaded? indica cuando esta esperando el response dl request
-          };
+            isLoaded: false, //flag is map loaded? indica cuando esta esperando el response dl request
+            modalIsOpen: false,
+            isModalDataLoaded: false,
+            doctorSchedule: {}
+        };
           
         
     }
@@ -24,7 +28,7 @@ class Search extends Component {
       if(this.props.coords === null){
           await new Promise ( r => setTimeout(r, 1000));
       }
-    let places = await getDoctor(this.props.location.especialidad, this.props.coords.latitude, this.props.coords.longitude)
+    let places = await servicePlaces.getDoctor(this.props.location.especialidad, this.props.coords.latitude, this.props.coords.longitude)
     
     this.setState({
       places: places.data.results,
@@ -33,7 +37,29 @@ class Search extends Component {
     
     return places.data.results;
 }
+
+    agendar = async (id) => {
+        this.setState({
+            modalIsOpen: true
+        });
+
+        let scheduleData = await servicePlaces.getSchedule(id);
+
+        this.setState({
+            doctorSchedule: scheduleData.data,
+            isModalDataLoaded: true
+        })
+    }
     
+    toggle = () =>{
+        this.setState({
+            modalIsOpen: !this.state.modalIsOpen
+        })
+    }
+    save = () => {
+
+    }
+
     render(){
         if(this.state.isLoaded === false){
             this.searchDoctor();
@@ -54,10 +80,15 @@ class Search extends Component {
                     </Col>
                     <Col lg="5" sm="12">
                         <div>
-                            <Lista places={this.state.places} isLoaded={this.state.isLoaded} />
+                            <Lista places={this.state.places} isLoaded={this.state.isLoaded} agendar={this.agendar} />
                         </div>
                     </Col>
                 </Row>
+                <ModalForm toggle ={this.toggle} 
+                isOpen={this.state.modalIsOpen} 
+                save={this.save} 
+                dataLoaded={this.state.isModalDataLoaded}
+                schedule={this.state.doctorSchedule} />
             </Container>
            
         ) : (

@@ -10,9 +10,14 @@ async function getDoctor(keyword, lat, long){
  // CORS EXTERNO
    let proxy = 'https://cors-anywhere.herokuapp.com/'
     const response = await axios
-    .get(proxy+endPoint)
+    .get("https://9be9eb1b-3849-448e-83d8-022285d44c6a.mock.pstmn.io/doctors")
     console.log(response);
     return response;
 }
-
-export default getDoctor;
+async function getSchedule(id){
+  const response = await axios
+  .get(`https://9be9eb1b-3849-448e-83d8-022285d44c6a.mock.pstmn.io/doctors/${id}schedule`)
+  console.log(response);
+  return response;
+}
+export default {getDoctor, getSchedule}; 
