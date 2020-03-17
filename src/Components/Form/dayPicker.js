@@ -11,6 +11,7 @@ export default class dayPicker extends Component {
       isEmpty: true,
       isDisabled: false,
     };
+    
   }
 
   handleDayChange(selectedDay, modifiers, dayPickerInput) {
@@ -20,6 +21,7 @@ export default class dayPicker extends Component {
       isEmpty: !input.value.trim(),
       isDisabled: modifiers.disabled === true,
     });
+    this.props.whenSelectDate(selectedDay);
   }
 
   render() {
@@ -41,6 +43,7 @@ export default class dayPicker extends Component {
             selectedDays: selectedDay,
             disabledDays: {
               daysOfWeek: [0, 6],
+              before: new Date()
             },
           }}
         />

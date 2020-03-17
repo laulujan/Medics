@@ -4,13 +4,13 @@ import './index.css'
 
 class Menu extends Component{
     render(){
-        return  <div>
+        return  <>
         <Navbar expand="md">
           <NavbarBrand href="/">
               <img src='img/logo1.png' className="logo1" alt="medics-logo"></img>
           </NavbarBrand>
         </Navbar>
-        </div>   
+        </>   
     }
 }    
 

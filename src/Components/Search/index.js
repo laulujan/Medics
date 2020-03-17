@@ -5,7 +5,6 @@ import { Container, Row, Col} from 'reactstrap';
 import servicePlaces from '../../Services/places';
 import Lista from '../List';
 import ModalForm from '../Modal/modal';
-
 import Map from '../../Map'
 class Search extends Component {
     constructor(props){
