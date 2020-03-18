@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import DayPickerInput from 'react-day-picker/DayPickerInput';
+import DayPicker from 'react-day-picker/DayPicker';
 import 'react-day-picker/lib/style.css';
 
 export default class dayPicker extends Component {
@@ -7,45 +7,36 @@ export default class dayPicker extends Component {
     super(props);
     this.handleDayChange = this.handleDayChange.bind(this);
     this.state = {
-      selectedDay: undefined,
-      isEmpty: true,
-      isDisabled: false,
+      selectedDay: undefined
     };
     
   }
 
-  handleDayChange(selectedDay, modifiers, dayPickerInput) {
-    const input = dayPickerInput.getInput();
+  handleDayChange(selectedDay, modifiers = {}, dayPickerInput) {
+    if (modifiers.disabled) {
+      return;
+    }
     this.setState({
-      selectedDay,
-      isEmpty: !input.value.trim(),
-      isDisabled: modifiers.disabled === true,
+      selectedDay: modifiers.selected ? undefined : selectedDay,
     });
+ 
     this.props.whenSelectDate(selectedDay);
   }
 
   render() {
-    const { selectedDay, isDisabled, isEmpty } = this.state;
+    const { selectedDay } = this.state;
+    const disabledDays = [
+      {daysOfWeek: [0, 6]},
+      {before: new Date()}
+    ];
     return (
+      
       <div>
-        <p>
-          {isEmpty && 'Selecciona una fecha'}
-          {!isEmpty && !selectedDay && 'Fecha invalida'}
-          {selectedDay && isDisabled && 'Fecha no disponible'}
-          {selectedDay &&
-            !isDisabled &&
-            `Seleccionaste ${selectedDay.toLocaleDateString()}`}
-        </p>
-        <DayPickerInput
-          value={selectedDay}
-          onDayChange={this.handleDayChange}
-          dayPickerProps={{
-            selectedDays: selectedDay,
-            disabledDays: {
-              daysOfWeek: [0, 6],
-              before: new Date()
-            },
-          }}
+        <DayPicker
+          onDayClick={this.handleDayChange}
+          disabledDays={disabledDays}
+          selectedDays={selectedDay}
+ 
         />
       </div>
     );

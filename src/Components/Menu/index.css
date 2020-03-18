@@ -1,8 +1,16 @@
 .navbar{
-    background-color: #28874ec7;
+    background-color: #2c29ce;
 }
 .logo1{
     width: 150px;
     height: 52px;
 
+}
+
+#userIcon{
+    color: floralwhite;
+    float: right;
+}
+.dropdown-toggle btn btn-secondary{
+    background-color: #2c29ce;
 }

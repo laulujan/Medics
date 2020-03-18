@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
-import { InputGroup, InputGroupAddon, Button, Input, Container, Row, Col} from 'reactstrap';
+import { Button, Input, Container, Row, Col, Jumbotron} from 'reactstrap';
 import {Link} from 'react-router-dom';
+import Information from './information'
 
 import './styles.css'
 
@@ -20,28 +21,31 @@ class Main extends Component {
         return <>
         <Container >
             <Row>
-                <Col lg="7" sm ="12">
-                <div>
-                    <img src="img/doctors2.png" className="img-fluid"></img>
-                </div>
+                <Col lg="6" sm="12">
+                    <Jumbotron fluid>
+                        <Container fluid>
+                            <h1 className="display-4"> Encuentra tu especialista medico</h1>
+                            <Input placeholder="Especialidad" 
+                                bsSize="lg" 
+                                onChange={this.onChange} />
+                            <div className="content"> 
+                                <Link  to={{ pathname:'/search', especialidad: this.state.speciality }}>
+                                <Button size="lg" block id="mainbutton">Buscar</Button>
+                                </Link>
+                            </div>
+                        </Container>
+                    </Jumbotron>
                 </Col>
-                <Col lg="5" sm="12">
-                <div className="div-center">
-                    <div className="content">
-                        <Input placeholder="Especialidad" 
-                    bsSize="lg" 
-                    onChange={this.onChange} />
-                    </div>
-                    <div className="content"> 
-                        <Link  to={{ pathname:'/search', especialidad: this.state.speciality }}>
-                        <Button outline color="info" size="lg" block>Buscar</Button>
-                    </Link>
-                    </div>
-                </div>
+                <Col lg="6" sm ="12">
+                    <Information/>
                 </Col>
+                
             </Row>
-
+            
         </Container>
+        <footer className="footer">
+            <span> Medics 2020</span>
+        </footer>
         </>
     }
 }
