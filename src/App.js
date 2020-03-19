@@ -6,10 +6,12 @@ import {
 } from "react-router-dom";
 import Menu from '../src/Components/Menu';
 import Main from '../src/Components/Main';
-import Search from '../src/Components/Search/index'
+import Search from '../src/Components/Search/index';
+import Profile from '../src/Components/Profile/profile';
 //import {Container} from 'reactstrap';
 
 import './App.css';
+import profile from './Components/Profile/profile';
 
 class App extends Component {
   render() {
@@ -20,7 +22,10 @@ class App extends Component {
       <Switch>
       <Route path="/search">
             <Search />
-          </Route>
+      </Route>
+      <Route path='/profile'>
+        <Profile/>
+      </Route>
       </Switch>
       <Route exact path="/">
             <Main />

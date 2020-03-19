@@ -13,15 +13,8 @@ const Information = (props) => {
             <Container fluid className="banner">
                 <Row>
                     <Col>
-                    <img src='img/cv1.png' fluid />
-                    <img src='img/cv2.png' fluid />
+                    <img src='img/infograph1.png' fluid />
                     </Col> 
-                </Row>
-                <Row>
-                    <Col>
-                    <img src='img/cv3.png' fluid />
-                    <img src='img/cv4.png' fluid />
-                    </Col>
                 </Row>
             </Container>
           <p className="lead"  >

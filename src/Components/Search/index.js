@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { withRouter } from 'react-router-dom';
+import { withRouter, Redirect } from 'react-router-dom';
 import { geolocated } from "react-geolocated";
 import { Container, Row, Col} from 'reactstrap';
 import servicePlaces from '../../Services/places';
@@ -14,7 +14,8 @@ class Search extends Component {
             isLoaded: false, //flag is map loaded? indica cuando esta esperando el response dl request
             modalIsOpen: false,
             isModalDataLoaded: false,
-            doctorSchedule: {}
+            doctorSchedule: {},
+            redirectToProfile: false,
         };
           
         
@@ -55,8 +56,13 @@ class Search extends Component {
             modalIsOpen: !this.state.modalIsOpen
         })
     }
-    save = () => {
-
+    save = async (data) => {
+        console.log(data)
+        let res = await servicePlaces.createAppointment(data)
+        if(res.data.status === "ok"){
+            console.log("redirect to profile")
+            this.setState({redirectToProfile: true})
+        }
     }
 
     render(){
@@ -64,6 +70,9 @@ class Search extends Component {
             this.searchDoctor();
         }
 
+        if(this.state.redirectToProfile === true){
+            return <Redirect to='/profile'/>
+        }
         return !this.props.isGeolocationAvailable ? (
             <div>Your browser does not support Geolocation</div>
         ) : !this.props.isGeolocationEnabled ? (

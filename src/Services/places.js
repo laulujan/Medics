@@ -20,4 +20,16 @@ async function getSchedule(id){
   console.log(response);
   return response;
 }
-export default {getDoctor, getSchedule}; 
+
+async function createAppointment(date, hour, id){
+  const response = await axios
+  .post(`https://9be9eb1b-3849-448e-83d8-022285d44c6a.mock.pstmn.io/appointment`, {
+    date: date,
+    hour: hour,
+    id: id
+  })
+  console.log(response);
+  return response;
+
+}
+export default {getDoctor, getSchedule, createAppointment}; 

@@ -9,7 +9,7 @@ function RenderHours(props){
   }
 
   console.log("esta es la fecha,", props.selectedDate)
-  let hoursDiv = [];
+  let hoursDiv = [<option key="0" value="">Seleccionar horario</option>];
 
   props.schedule.working_hours.map((h, key)=>{
     console.log(h)
@@ -28,14 +28,14 @@ function RenderHours(props){
 
         })
         if(!isFound){
-          hoursDiv.push(<option key={now_hour}>{now_hour} - {now_hour+.5}</option>)
+          hoursDiv.push(<option key={now_hour} value={now_hour}>{now_hour} - {now_hour+.5}</option>)
         }
       }else{
-        hoursDiv.push(<option key={now_hour}>{now_hour} - {now_hour+.5}</option>)
+        hoursDiv.push(<option key={now_hour} value={now_hour}>{now_hour} - {now_hour+.5}</option>)
       }
     }
   })
-return <Input type="select" name="select" id="exampleSelect">{hoursDiv}</Input>
+return <Input type="select" name="select" id="hour" onChange={(x) => props.whenSelectHour(x)}>{hoursDiv}</Input>
 }
 
 
@@ -49,16 +49,24 @@ const FormBooking = props => {
     console.log(props);
     setSelectedDate(date.toISOString().substring(0,10))
   }
+
+  const whenSelectHour = (hour)=>{
+    props.formData({
+      hora: hour.target.value,
+      fecha: selectedDate,
+      idDoctor: props.schedule.idDoctor
+    }) 
+  }
   return (
     <Form>
       <Row form>
         <Col md={6}>
           <FormGroup>
-            <DayPicker className="form-control" whenSelectDate={whenSelectDate}></DayPicker>
+            <DayPicker className="form-control" selectedDate={selectedDate} whenSelectDate={whenSelectDate}></DayPicker>
           </FormGroup>
         </Col>
       </Row>
-      <RenderHours {...props} selectedDate={selectedDate}/>
+      <RenderHours {...props} whenSelectHour={whenSelectHour}/>
       <Row style={{display: showHours ? 'block' : 'none'}}>
         <Col>
         
