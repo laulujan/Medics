@@ -39,8 +39,8 @@ export default class Map extends Component {
             return (
               <AnyReactComponent
                 key={place.id}
-                lat={place.geometry.location.lat}
-                lng={place.geometry.location.lng}
+                lat={place.lat}
+                lng={place.lng}
                 text={place.name}
               />
             );

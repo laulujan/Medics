@@ -31,11 +31,11 @@ class Search extends Component {
     let places = await servicePlaces.getDoctor(this.props.location.especialidad, this.props.coords.latitude, this.props.coords.longitude)
     
     this.setState({
-      places: places.data.results,
+      places: places.data,
       isLoaded: true // el flag cambia a true cuando recibe el response
     });
     
-    return places.data.results;
+    return places.data;
 }
 
     agendar = async (id) => {

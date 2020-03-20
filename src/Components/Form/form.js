@@ -16,7 +16,7 @@ function RenderHours(props){
     let min = h[0]
     let max = h[1]
 
-    for (let now_hour= min; now_hour<max; now_hour = now_hour +.5) {
+    for (let now_hour= min; now_hour<max; now_hour = now_hour +1) {
       if(props.selectedDate in props.schedule.unabled_hours){
         console.log("si encontro fecha")
         let isFound = false;
@@ -28,10 +28,10 @@ function RenderHours(props){
 
         })
         if(!isFound){
-          hoursDiv.push(<option key={now_hour} value={now_hour}>{now_hour} - {now_hour+.5}</option>)
+          hoursDiv.push(<option key={now_hour} value={now_hour}>{now_hour} - {now_hour+1}</option>)
         }
       }else{
-        hoursDiv.push(<option key={now_hour} value={now_hour}>{now_hour} - {now_hour+.5}</option>)
+        hoursDiv.push(<option key={now_hour} value={now_hour}>{now_hour} - {now_hour+1}</option>)
       }
     }
   })
@@ -66,7 +66,7 @@ const FormBooking = props => {
           </FormGroup>
         </Col>
       </Row>
-      <RenderHours {...props} whenSelectHour={whenSelectHour}/>
+      <RenderHours {...props} selectedDate={selectedDate} whenSelectHour={whenSelectHour}/>
       <Row style={{display: showHours ? 'block' : 'none'}}>
         <Col>
         
