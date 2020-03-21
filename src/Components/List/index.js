@@ -19,7 +19,9 @@ class lista extends Component {
                 {place.name}
               </ListGroupItemHeading>
               <ListGroupItemText>
-                {place.vicinity}
+                Dirección: {place.vicinity}
+                <br/>
+                Precio por cita $ {place.price} .00 MXN
               </ListGroupItemText>
               <Button onClick={() => this.props.agendar(place.id)}> Cita </Button>
             </ListGroupItem>

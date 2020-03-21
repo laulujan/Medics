@@ -45,6 +45,7 @@ class Search extends Component {
 
         let scheduleData = await servicePlaces.getSchedule(id);
 
+        scheduleData.data.place = this.state.places.filter((place) => place.id === id )[0];
         this.setState({
             doctorSchedule: scheduleData.data,
             isModalDataLoaded: true
@@ -81,9 +82,9 @@ class Search extends Component {
             <Container>
                 <Row>
                     <Col lg="7" sm="12">
-                    <div>
+                    <div >
                         <Map places={this.state.places} isLoaded={this.state.isLoaded} 
-                        lat={this.props.coords.latitude} lng={this.props.coords.longitude}/>
+                        lat={this.props.coords.latitude} lng={this.props.coords.longitude} agendar={this.agendar} />
                     </div>
                     </Col>
                     <Col lg="5" sm="12">
@@ -96,7 +97,8 @@ class Search extends Component {
                 isOpen={this.state.modalIsOpen} 
                 save={this.save} 
                 dataLoaded={this.state.isModalDataLoaded}
-                schedule={this.state.doctorSchedule} />
+                schedule={this.state.doctorSchedule}
+                />
             </Container>
            
         ) : (

@@ -1,5 +1,4 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
 import { Jumbotron, Button , Container, Row, Col} from 'reactstrap';
 
 const Information = (props) => {
@@ -13,7 +12,7 @@ const Information = (props) => {
             <Container fluid className="banner">
                 <Row>
                     <Col>
-                    <img src='img/infograph1.png' fluid />
+                    <img src='img/infograph1.png' alt="recomendations" fluid />
                     </Col> 
                 </Row>
             </Container>

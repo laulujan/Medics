@@ -1,10 +1,13 @@
 import React, { Component } from "react";
 import GoogleMapReact from "google-map-react";
-//import Marker from "google-map-react";
 import {apiKey} from './config/privat';
+import icon from './img/blu-blank.png';
+import icon1 from './img/ylw-circle.png'
 
 
-const AnyReactComponent = ({ text }) => <div>{text}</div>;
+const AnyReactComponent = ({ agendarFn, id }) => <div onClick={() => agendarFn(id)} ><img alt="results-icon" src={icon} width="24px" height="24px"/></div>;
+
+const MyLocation = ({ text }) => <div><img alt="place-icon" src={icon1} width="24px" height="24px"/></div>;
 const handleApiLoaded = (map, maps) => {
   // use map and maps objects
 };
@@ -16,7 +19,9 @@ export default class Map extends Component {
   }
 
   static defaultProps = {
-    zoom: 14 //zoom del mapa(libreria)
+    zoom: 14 ,
+    //zoom del mapa(libreria)
+
   };
 
   render() {
@@ -32,9 +37,14 @@ export default class Map extends Component {
           onGoogleApiLoaded={({ map, maps }) => handleApiLoaded(map, maps)}
         >
           
+          
           {//recorre los lugares(vienen en un array) encontrados y los dibuja en el mapa en cada lugar tiene 
           //su lat y lng
           }
+          <MyLocation
+                lat={this.props.lat}
+                lng={ this.props.lng}
+              />
           {places.map(place => {
             return (
               <AnyReactComponent
@@ -42,6 +52,8 @@ export default class Map extends Component {
                 lat={place.lat}
                 lng={place.lng}
                 text={place.name}
+                id={place.id}
+                agendarFn={this.props.agendar}
               />
             );
           })}

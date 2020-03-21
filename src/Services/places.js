@@ -1,4 +1,4 @@
-import {apiKey} from '../config/privat';
+// import {apiKey} from '../config/privat';
 const axios = require('axios');
 const url = 'localhost:9000';
 

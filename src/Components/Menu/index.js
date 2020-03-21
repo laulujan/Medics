@@ -1,22 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 import {
-  Collapse,
   Navbar,
-  NavbarToggler,
-  NavbarBrand,
-  Nav,
-  NavItem,
-  NavLink,
-  UncontrolledDropdown,
-  Button,
-  DropdownToggle,
-  DropdownMenu,
-  DropdownItem,
-  NavbarText,
-  ButtonToggle,
-  Card,
-  UncontrolledCollapse,
-  CardBody
+  NavbarBrand
 } from "reactstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUserCircle } from "@fortawesome/free-regular-svg-icons";
@@ -27,9 +12,7 @@ const userIcon = (
 );
 
 const Menu = props => {
-  const [dropdownOpen, setOpen] = useState(false);
 
-  const toggle = () => setOpen(!dropdownOpen);
 
   return (
     <div>
