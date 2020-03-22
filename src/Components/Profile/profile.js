@@ -24,11 +24,9 @@ const Profile = props => {
   const toggle = tab => {
     if (activeTab !== tab) setActiveTab(tab);
   };
-  const [data, setData] = useState({});
   useEffect(() => {
     const fetchData = async () => {
       const result = await Services.getAppointments(1);
-      setData(result.data);
       setPending(result.data.pending);
       setPast(result.data.past);
     };
@@ -38,7 +36,6 @@ const Profile = props => {
   const cancel = async function(id) {
     await Services.cancelAppointment(id);
     const result = await Services.getAppointments(1);
-    setData(result.data);
     setPending(result.data.pending);
     setPast(result.data.past);
   };
@@ -46,7 +43,6 @@ const Profile = props => {
   const deleted = async function(id) {
     await Services.deleteAppointment(id);
     const result = await Services.getAppointments(1);
-    setData(result.data);
     setPending(result.data.pending);
     setPast(result.data.past);
   };

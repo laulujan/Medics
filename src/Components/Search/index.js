@@ -56,11 +56,9 @@ class Search extends Component {
     save = async (data) => {
         let res = await servicePlaces.createAppointment(data)
         if(res.data.status === "ok"){
-            console.log("redirect to profile")
             this.setState({redirectToProfile: true})
         }
     }
-
     render(){
         if(this.state.isLoaded === false){
             this.searchDoctor();

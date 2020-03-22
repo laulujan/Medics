@@ -2,7 +2,8 @@ import React, { Component } from "react";
 import GoogleMapReact from "google-map-react";
 import {apiKey} from './config/privat';
 import icon from './img/blu-blank.png';
-import icon1 from './img/ylw-circle.png'
+import icon1 from './img/ylw-circle.png';
+import { Spinner } from 'reactstrap';
 
 
 const AnyReactComponent = ({ agendarFn, id }) => <div onClick={() => agendarFn(id)} ><img alt="results-icon" src={icon} width="24px" height="24px"/></div>;
@@ -13,15 +14,10 @@ const handleApiLoaded = (map, maps) => {
 };
 
 export default class Map extends Component {
-  constructor(props) {
-    super(props);
-
-  }
 
   static defaultProps = {
     zoom: 14 ,
     //zoom del mapa(libreria)
-
   };
 
   render() {
@@ -59,6 +55,6 @@ export default class Map extends Component {
           })}
         </GoogleMapReact>
       </div>
-    ): ( <div>LOADING </div>)
+    ): ( <div> <Spinner color="primary" /></div>)
   }
 }

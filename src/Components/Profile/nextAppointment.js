@@ -28,7 +28,7 @@ const NextAppointment = props => {
                   </td>
                   <td>{app.price}</td>
                   <td>
-                    {app.canceled==1 ? (
+                    {app.canceled===1 ? (
                       <div>Cancelado</div>
                     ) : (
                       <Button id="mainbutton" onClick={()=>props.cancel(app.id_appointment)}>Cancelar</Button>

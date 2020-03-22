@@ -11,7 +11,7 @@ import Profile from '../src/Components/Profile/profile';
 //import {Container} from 'reactstrap';
 
 import './App.css';
-import profile from './Components/Profile/profile';
+
 
 class App extends Component {
   render() {

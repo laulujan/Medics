@@ -38,7 +38,7 @@ return <Input type="select" name="select" id="hour" onChange={(x) => props.whenS
 
 
 const FormBooking = props => {
-  const [showHours, setShowHours] = useState(false);
+  const [showHours] = useState(false);
   const [selectedDate, setSelectedDate] = useState(null);
   const whenSelectDate = (date) => {
     setSelectedDate(date.toISOString().substring(0,10))
