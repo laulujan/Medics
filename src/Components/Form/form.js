@@ -8,24 +8,20 @@ function RenderHours(props){
     return <div></div>
   }
 
-  console.log("esta es la fecha,", props.selectedDate)
   let hoursDiv = [<option key="0" value="">Seleccionar horario</option>];
 
   props.schedule.working_hours.map((h, key)=>{
-    console.log(h)
     let min = h[0]
     let max = h[1]
 
     for (let now_hour= min; now_hour<max; now_hour = now_hour +1) {
       if(props.selectedDate in props.schedule.unabled_hours){
-        console.log("si encontro fecha")
         let isFound = false;
         props.schedule.unabled_hours[props.selectedDate].map((unableHour) => {
           if(unableHour[0] === now_hour ){
-            console.log("fecha ocupada")
             isFound = true;
           }
-
+          return isFound;
         })
         if(!isFound){
           hoursDiv.push(<option key={now_hour} value={now_hour}>{now_hour} - {now_hour+1}</option>)
@@ -34,19 +30,17 @@ function RenderHours(props){
         hoursDiv.push(<option key={now_hour} value={now_hour}>{now_hour} - {now_hour+1}</option>)
       }
     }
+
+    return hoursDiv;
   })
 return <Input type="select" name="select" id="hour" onChange={(x) => props.whenSelectHour(x)}>{hoursDiv}</Input>
 }
 
 
-
 const FormBooking = props => {
-  console.log(props.schedule);
   const [showHours, setShowHours] = useState(false);
   const [selectedDate, setSelectedDate] = useState(null);
   const whenSelectDate = (date) => {
-    console.log(date.toISOString().substring(0,10));
-    console.log(props);
     setSelectedDate(date.toISOString().substring(0,10))
   }
 
@@ -68,10 +62,7 @@ const FormBooking = props => {
       </Row>
       <RenderHours {...props} selectedDate={selectedDate} whenSelectHour={whenSelectHour}/>
       <Row style={{display: showHours ? 'block' : 'none'}}>
-        <Col>
-        
-        </Col>
-        
+        <Col/>
       </Row>
     </Form>
   );

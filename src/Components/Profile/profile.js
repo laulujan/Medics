@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   TabContent,
   TabPane,
@@ -10,13 +10,45 @@ import {
   Col,
   Container
 } from "reactstrap";
+import {Link} from 'react-router-dom';
 import classnames from "classnames";
+import Services from "../../Services/places";
+import NextAppointment from "./nextAppointment";
+import PastAppointment from "./pastAppointment";
 
 const Profile = props => {
+  const [pending, setPending] = useState([]);
+  const [past, setPast] = useState([]);
   const [activeTab, setActiveTab] = useState("1");
-
+  const [reload, setReload] = useState(0);
   const toggle = tab => {
     if (activeTab !== tab) setActiveTab(tab);
+  };
+  const [data, setData] = useState({});
+  useEffect(() => {
+    const fetchData = async () => {
+      const result = await Services.getAppointments(1);
+      setData(result.data);
+      setPending(result.data.pending);
+      setPast(result.data.past);
+    };
+    fetchData();
+  }, [reload, setReload]);
+
+  const cancel = async function(id) {
+    await Services.cancelAppointment(id);
+    const result = await Services.getAppointments(1);
+    setData(result.data);
+    setPending(result.data.pending);
+    setPast(result.data.past);
+  };
+
+  const deleted = async function(id) {
+    await Services.deleteAppointment(id);
+    const result = await Services.getAppointments(1);
+    setData(result.data);
+    setPending(result.data.pending);
+    setPast(result.data.past);
   };
 
   return (
@@ -40,19 +72,19 @@ const Profile = props => {
                 toggle("2");
               }}
             >
-              Citas pasadas
+              Citas Anteriores
             </NavLink>
           </NavItem>
         </Nav>
         <TabContent activeTab={activeTab}>
           <TabPane tabId="1">
             <Row>
-             
+              <NextAppointment pending={pending} cancel={cancel} />
             </Row>
           </TabPane>
           <TabPane tabId="2">
             <Row>
-             
+              <PastAppointment past={past} deleted={deleted} />
             </Row>
           </TabPane>
         </TabContent>
@@ -60,7 +92,12 @@ const Profile = props => {
       <Container>
         <Row>
           <Col>
-           <Button>Agendar otra cita</Button>
+            <Link
+              to={{ pathname: "/"}}>
+              <Button id="mainbutton">
+                Agendar otra cita
+              </Button>
+            </Link>
           </Col>
         </Row>
       </Container>

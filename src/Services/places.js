@@ -27,4 +27,25 @@ async function createAppointment(data){
   return response;
 
 }
-export default {getDoctor, getSchedule, createAppointment}; 
+async function getAppointments(id){
+  const response = await axios
+  .get(`http://${url}/appointments/list/${id}`)
+  console.log(response);
+  return response;
+}
+async function cancelAppointment(id){
+  const response = await axios
+  .put(`http://${url}/appointments/cancel/${id}`)
+  console.log(response);
+  return response;
+}
+
+async function deleteAppointment(id){
+  const response = await axios
+  .put(`http://${url}/appointments/delete/${id}`)
+  console.log(response);
+  return response;
+}
+
+export default {getDoctor, getSchedule, createAppointment, getAppointments, cancelAppointment, deleteAppointment}; 
+

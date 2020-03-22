@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { withRouter, Redirect } from 'react-router-dom';
 import { geolocated } from "react-geolocated";
-import { Container, Row, Col} from 'reactstrap';
+import { Container, Row, Col, Spinner} from 'reactstrap';
 import servicePlaces from '../../Services/places';
 import Lista from '../List';
 import ModalForm from '../Modal/modal';
@@ -16,15 +16,11 @@ class Search extends Component {
             isModalDataLoaded: false,
             doctorSchedule: {},
             redirectToProfile: false,
-        };
-          
-        
+        };  
     }
 
     
   searchDoctor = async () => {
-      console.log(this.props);
-      console.log('hola');
       if(this.props.coords === null){
           await new Promise ( r => setTimeout(r, 1000));
       }
@@ -58,7 +54,6 @@ class Search extends Component {
         })
     }
     save = async (data) => {
-        console.log(data)
         let res = await servicePlaces.createAppointment(data)
         if(res.data.status === "ok"){
             console.log("redirect to profile")
@@ -102,7 +97,10 @@ class Search extends Component {
             </Container>
            
         ) : (
-            <div>Getting the location data&hellip; </div>
+            <div>
+                <Spinner color="primary" />
+                Getting the location data 
+            </div>
         );
     }
 }
@@ -111,7 +109,7 @@ class Search extends Component {
 
 export default geolocated({
     positionOptions: {
-        enableHighAccuracy: false,
+        enableHighAccuracy: true,
     },
     userDecisionTimeout: 5000,
   })(withRouter(Search));

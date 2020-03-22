@@ -4,7 +4,8 @@ import {
   ListGroupItem,
   ListGroupItemHeading,
   ListGroupItemText,
-  Button
+  Button,
+  Spinner 
 } from "reactstrap";
 
 class lista extends Component {
@@ -29,7 +30,9 @@ class lista extends Component {
         })}
       </ListGroup>
     ) : (
-      <div>LOADING </div>
+      <div>
+        <Spinner color="primary" />
+      </div>
     );
   }
 }
