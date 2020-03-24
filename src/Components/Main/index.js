@@ -17,17 +17,26 @@ class Main extends Component {
     const speciality = e.target.value;
     this.setState({ speciality });
   };
+  
+  onClick= e => {
+    if(!this.state.speciality) {
+      e.preventDefault();
+      
+    } 
+  };
+  
+
   render() {
     return (
       <>
-        <Container>
+        <Container fluid>
           <Row>
             <Col lg="6" sm="12">
-              <Jumbotron fluid>
-                <Container fluid>
+              <Jumbotron >
+                <Container  id="main-container">
                   <h1 className="display-4">
                     {" "}
-                    Encuentra tu especialista medico
+                    Encuentra tu especialista médico
                   </h1>
                   <Container>
                     <div>
@@ -43,7 +52,7 @@ class Main extends Component {
                           especialidad: this.state.speciality
                         }}
                       >
-                        <Button block id="mainbutton">
+                        <Button block id="mainbutton" onClick={(event) => this.onClick(event)}>
                           Buscar
                         </Button>
                       </Link>

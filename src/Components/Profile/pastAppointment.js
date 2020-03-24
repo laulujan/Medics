@@ -20,7 +20,7 @@ const PastAppointment = props => {
               return (
                 <tr key={key}>
                   <td>{app.name}</td>
-                  <td>{app.selected_date}</td>
+                  <td>{app.selected_date.substring(0, 10)}</td>
                   <td>
                     {app.hour_init} - {app.hour_end}
                   </td>

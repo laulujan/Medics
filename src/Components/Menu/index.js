@@ -11,7 +11,7 @@ const userIcon = (
 
 const Menu = props => {
   return (
-    <div>
+    <div id="nav">
       <Navbar>
         <NavbarBrand href="/" className="mr-auto">
           <img src="img/logo1.png" className="logo1" alt="medics-logo" />

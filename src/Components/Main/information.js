@@ -1,5 +1,6 @@
 import React from 'react';
 import { Jumbotron, Button , Container, Row, Col} from 'reactstrap';
+import "./styles.css";
 
 const Information = (props) => {
     return (
@@ -12,12 +13,14 @@ const Information = (props) => {
             <Container fluid className="banner">
                 <Row>
                     <Col>
-                    <img src='img/infograph1.png' alt="recomendations" fluid />
+                    <img src='img/infograph1.png' alt="recomendations" />
                     </Col> 
                 </Row>
             </Container>
           <p className="lead"  >
-            <Button id="mainbutton" className="float-right">Mas información</Button>
+            <Button id="mainbutton" className="float-right">
+              <a href="https://coronavirus.gob.mx/" id="link">Mas información</a>
+            </Button>
           </p>
           </Container>
         </Jumbotron>
