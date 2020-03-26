@@ -22,7 +22,7 @@ class Search extends Component {
     
   searchDoctor = async () => {
       if(this.props.coords === null){
-          await new Promise ( r => setTimeout(r, 1000));
+          await new Promise ( r => setTimeout(r, 10000));
       }
     let places = await servicePlaces.getDoctor(this.props.location.especialidad, this.props.coords.latitude, this.props.coords.longitude)
     
