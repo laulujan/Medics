@@ -9,10 +9,9 @@ https://github.com/laulujan/medics-backend
 ### `npm install`
 
 3.- Copy src/config/private.example.js on src/config/privat.js 
-4.- Add your google API key (if you don't have one contact the administrator to provide you one).
-
+4.- Add your google API key (if you don't have one contact
 run:
 ### `npm start`
 
-#### Leave your comments :)
+####  :)
 
